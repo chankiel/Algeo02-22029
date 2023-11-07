@@ -1,0 +1,115 @@
+@font-face { font-family: Avigea; src: url('./../../assets/Avigea.ttf'); } 
+h1 {
+   font-family: Avigea
+}
+@font-face { font-family: Poppins; src: url('./../../assets/Poppins-Light.otf'); } 
+h1 {
+   font-family: Poppins
+}
+@font-face { font-family: Poppins-Thicc; src: url('./../../assets/Poppins-Bold.otf'); } 
+h1 {
+   font-family: Poppins-Thicc
+}
+body {
+background-image : url('./../../assets/CAMPIC.jpg');
+background-repeat : no-repeat;
+background-attachment: fixed;
+background-size: cover;
+margin: 0;
+font-family: Verdana, Geneva, Tahoma, sans-serif, Helvetica, sans-serif;
+}
+html {
+scroll-behavior: smooth;
+}
+.topnav {
+background-color: rgba(0, 0, 0, 0.344);
+overflow: hidden;
+text-align: center;
+z-index: 99999;
+right : 0px;
+top : 0px;
+width: 100%;
+position: fixed;
+}
+
+.topnav a {
+float: left;
+color: #f2f2f2;
+text-align: center;
+padding: 24px 26px;
+text-decoration: none;
+font-size: 24px;
+}
+
+.topnav a:hover {
+text-decoration: underline;
+}
+
+.topnav a.texte {
+color: white;
+padding: 28.5px;
+}
+.disabled {
+   pointer-events: none;  /* <----------- */
+}
+.topnav a.active {
+padding: 40px;
+text-decoration: underline;
+}
+.square {
+height: 10cm;
+width: 20cm;
+background-color: #0000004c;
+shape-margin:20cm;
+margin-left: 1.5cm;
+padding-left: 0.5cm;
+border-radius: 20px;
+}
+.padding
+{
+height: 528px;
+width: 505px;
+display: inline-block;
+float: right;
+padding-right: 5cm;
+margin-top: -1.5cm;
+}
+.square1 {
+height: 3cm;
+width: 34cm;
+background-color: #ff0000;
+border-radius: 20px;
+margin-left: 1.25cm;
+padding-left: 0.5cm;
+padding-bottom: 0.25cm;
+}
+.square2 {
+height: 13.8cm;
+width: 37cm;
+background-color: #ffadad4c;
+margin-left: 1cm;
+margin-top: 0.5cm;
+padding: 5px 5px 5px 5px;
+border-radius: 20px;
+}
+.square3 {
+height: 15cm;
+width: cover;
+background-color: #ffffff;
+border-radius: 20px;
+margin-top: 5cm;
+}
+.square4 {
+height: 4cm;
+width: cover;
+background-color: #000000;
+margin-top: -0.5cm;
+}
+#parkspot {
+position: relative;
+z-index: 2;
+}
+#about {
+position: relative;
+z-index: 1;
+}

@@ -1,0 +1,14 @@
+#root {
+    width: 100%;
+}
+
+.Seni .card{
+    background-color: #00D22E;
+}
+
+.Sipil .card{
+    background-color: #F5DC00;
+}
+.Saraga .card{
+    background-color: #f57676;
+}
