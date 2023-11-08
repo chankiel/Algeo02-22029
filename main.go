@@ -87,7 +87,7 @@ func imgCompLength(imgComp ImgComp)float64{
 }
 
 func textureSimilarity(img1 ImgComp,img2 ImgComp)float64{
-    var cosineSim float64 = (img1.contrast+img2.contrast)+(img1.homogenity+img2.homogenity)+(img1.entropy+img2.entropy)
+    var cosineSim float64 = (img1.contrast*img2.contrast)+(img1.homogenity*img2.homogenity)+(img1.entropy*img2.entropy)
     cosineSim /= (imgCompLength(img1)*imgCompLength(img2))
     return cosineSim
 }
@@ -137,7 +137,7 @@ func main() {
     var imgCompMean = makeImgCompMean(occMtrx,sizeOcc)
     fmt.Printf("Contrast: %v\nHomogenity: %v\nEntropy: %v\n",imgCompMean.contrast,imgCompMean.homogenity,imgCompMean.entropy)
 
-    inputFile2, err2 := os.Open("monaLisa1.jpg")
+    inputFile2, err2 := os.Open("monaLisa2.jpg")
     if err2 != nil {
         fmt.Println("Error opening image:", err2)
         return
