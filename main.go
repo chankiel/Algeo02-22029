@@ -1,12 +1,13 @@
 package main
 
 import (
-    "fmt"
-    "image"
-	_"image/jpeg"
-    "image/color"
-    "os"
-    "math"
+	"fmt"
+	"image"
+	"image/color"
+	_ "image/jpeg"
+	"math"
+	"os"
+	"time"
 )
 
 type ImgComp struct{
@@ -93,6 +94,7 @@ func textureSimilarity(img1 ImgComp,img2 ImgComp)float64{
 }
 
 func main() {
+    starttime := time.Now()
     inputFile, err := os.Open("monaLisa1.jpg")
     if err != nil {
         fmt.Println("Error opening image:", err)
@@ -137,7 +139,7 @@ func main() {
     var imgCompMean = makeImgCompMean(occMtrx,sizeOcc)
     fmt.Printf("Contrast: %v\nHomogenity: %v\nEntropy: %v\n",imgCompMean.contrast,imgCompMean.homogenity,imgCompMean.entropy)
 
-    inputFile2, err2 := os.Open("monaLisa2.jpg")
+    inputFile2, err2 := os.Open("apel2.jpeg")
     if err2 != nil {
         fmt.Println("Error opening image:", err2)
         return
@@ -183,5 +185,8 @@ func main() {
 
     var cosineSim float64
     cosineSim = textureSimilarity(imgCompMean,imgCompMean2)
+    endtime := time.Now()
+    difftime := endtime.Sub(starttime)
     fmt.Printf("Kemiripan: %v\n",cosineSim)
+    fmt.Printf("%v\n",difftime)
 }
