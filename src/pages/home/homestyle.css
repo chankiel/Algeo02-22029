@@ -56,6 +56,28 @@ padding: 28.5px;
 padding: 40px;
 text-decoration: underline;
 }
+.squareupload {
+height: 10cm;
+width: 30cm;
+background-color: rgb(255, 255, 255);
+border-color: rgb(0, 0, 0);
+padding-left: 0.5cm;
+border-radius: 20px;
+outline: 15px solid rgb(197, 253, 216);
+}
+.squareprev {
+height: 10cm;
+width: 10cm;
+background-color: rgb(255, 255, 255);
+margin-top: 100px;
+margin-bottom: 50px;
+margin-left: 9.75cm;
+border-color: rgb(0, 0, 0);
+border-radius: 20px;
+outline: 15px solid rgb(234, 255, 0);
+position: relative;
+display: flex;
+}
 .square {
 height: 10cm;
 width: 20cm;
@@ -64,6 +86,7 @@ shape-margin:20cm;
 margin-left: 1.5cm;
 padding-left: 0.5cm;
 border-radius: 20px;
+outline: 8px solid white;
 }
 .padding
 {

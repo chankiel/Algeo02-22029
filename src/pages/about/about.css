@@ -1,0 +1,46 @@
+#root {
+    width: 100%;
+}
+
+.Seni .card{
+    background-color: #00D22E;
+}
+
+.Sipil .card{
+    background-color: #F5DC00;
+}
+.Saraga .card{
+    background-color: #f57676;
+}
+
+.squarebout {
+height: 2.3cm;
+width: 8cm;
+padding-left: 10px;
+font-family: Poppins-Thicc;
+background-color: rgba(0, 0, 255, 0.766);
+margin-top: 0px;
+margin-left: 4cm;
+border-color: rgb(0, 0, 0);
+border-radius: 20px;
+outline: 5px solid rgb(0, 0, 255);
+}
+.squarebig {
+height: 20cm;
+width: 30cm;
+padding-left: 10px;
+font-family: Poppins-Thicc;
+background-color: rgba(0, 0, 0, 0.766);
+margin-left: 4cm;
+border-color: rgb(0, 0, 0);
+border-radius: 20px;
+outline: 5px solid rgb(255, 255, 255);
+}
+a { 
+text-decoration: none; 
+color: rgb(255, 255, 255); 
+}
+a:visited { 
+text-decoration: none; 
+color: rgb(255, 255, 255); 
+}

@@ -104,3 +104,32 @@ button {
   text-decoration: none;
   cursor: pointer;
 }
+
+button[type=submit] {
+  padding-left: 5cm;
+  padding-right: 5cm;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #a2f1a5;
+  color: white;
+  margin: 8px 330px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+button[type=submit]:hover {
+  background-color: #86c389;
+}
+
+input[type=file] {
+  background-color: #86c389;
+  color: black;
+  padding: 5px 5px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  margin: 0 30px 0 0;
+}
+

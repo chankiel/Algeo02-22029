@@ -1,5 +1,5 @@
-import Admin from "./admin/admin";
+import About from "./about/about";
 import Home from "./home/Home"
-import Reservation from "./reservation/Reservation";
+import Upload from "./upload/upload";
 
-export {Admin, Home, Reservation};
+export {About, Home, Upload};
