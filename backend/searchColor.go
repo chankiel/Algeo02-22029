@@ -48,22 +48,24 @@ func convertHSV(paint color.Color) (float64, float64, float64) {
 func indexHSV(paint color.Color) int32 {
 	h, s, v := convertHSV(paint)
 	var H, S, V int32
-	if h > 315 && h <= 360 {
+	if h >= 316 && h <= 360 {
 		H = 0
-	} else if h >= 0 && h <= 25 {
+	} else if h >= 1 && h <= 25 {
 		H = 1
-	} else if h > 25 && h <= 40 {
+	} else if h >= 25 && h <= 40 {
 		H = 2
-	} else if h > 40 && h <= 120 {
+	} else if h >= 40 && h <= 120 {
 		H = 3
-	} else if h > 120 && h <= 190 {
+	} else if h >= 120 && h <= 190 {
 		H = 4
-	} else if h > 190 && h <= 270 {
+	} else if h >= 190 && h <= 270 {
 		H = 5
-	} else if h > 270 && h <= 295 {
+	} else if h >= 270 && h <= 295 {
 		H = 6
-	} else {
+	} else if h >= 295 && h <= 315 {
 		H = 7
+	} else {
+		H = 0
 	}
 	if s < 0.2 {
 		S = 0
@@ -118,7 +120,7 @@ func cosineSimiliarity(bins1 [9][72]int32, data Vektor, resultChan chan tuplePer
 	}
 	finalRes = accum[0] + 2*accum[1] + accum[2] + 2*accum[3] + 4*accum[4] + 2*accum[5] + accum[6] + 2*accum[7] + accum[8]
 	//fmt.Printf("%v -- %v\n", data.ImgName, finalRes)
-	finalRes /= 16
+	finalRes = finalRes * 100 / 16
 	var res tuplePercentage
 	res.Path = data.ImgName
 	res.Percentage = finalRes
@@ -270,7 +272,7 @@ func searchImageColor(imageSearched string, binsFile string, targetFile string) 
 	var finalImage []tuplePercentage
 	for _, tuple := range tempFoundImage {
 		//fmt.Println(tuple)
-		if tuple.Percentage >= 0.60 {
+		if tuple.Percentage >= 60 {
 			finalImage = append(finalImage, tuple)
 		}
 	}
