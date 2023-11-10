@@ -196,7 +196,7 @@ func calculateVector(path string, resultChan chan Vektor, wg *sync.WaitGroup) {
 		}
 	}
 	for x := 3 * width; x < 4*width; x++ { // 8
-		for y := 3 * width; y < 4*height; y++ {
+		for y := 3 * height; y < 4*height; y++ {
 			index := indexHSV(img.At(x, y))
 			vektor.Bins[8][index]++
 		}
@@ -257,7 +257,7 @@ func preproccessImage(dirpath string, destFile string) {
 
 func main() {
 	sTime := time.Now()
-	preproccessImage("dataset", "image.json")
+	preproccessImage("bus", "busImage.json")
 	eTime := time.Now()
 	dTime := eTime.Sub(sTime)
 	fmt.Println("Diff time: ", dTime)

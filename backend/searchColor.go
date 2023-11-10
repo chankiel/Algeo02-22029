@@ -100,14 +100,24 @@ func cosineSimiliarity(bins1 [9][72]int32, data Vektor, resultChan chan tuplePer
 		down1[i] = lengDorm(bins1[i])
 		down2[i] = lengDorm(data.Bins[i])
 	}
+	//fmt.Printf("%v %v ----- ", down1, down2)
 	var finalRes float64 = 0
 	for k := 0; k < 9; k++ {
 		for i := 0; i < 72; i++ {
 			accum[k] += float64(bins1[k][i]) * float64(data.Bins[k][i])
 		}
+		//if down1[k] == 0 || down2[k] == 0 {
+		//	if down1[k] == 0 || down2[k] == 0 {
+		//		accum[k] = 1
+		//	} else {
+		//		accum[k] = 0
+		//	}
+		//} else {
 		accum[k] /= (down1[k] * down2[k])
+		//}
 	}
 	finalRes = accum[0] + 2*accum[1] + accum[2] + 2*accum[3] + 4*accum[4] + 2*accum[5] + accum[6] + 2*accum[7] + accum[8]
+	//fmt.Printf("%v -- %v\n", data.ImgName, finalRes)
 	finalRes /= 16
 	var res tuplePercentage
 	res.Path = data.ImgName
@@ -194,12 +204,14 @@ func calculateSingleVector(path string) [9][72]int32 {
 		for y := height; y < 3*height; y++ {
 			index := indexHSV(img.At(x, y))
 			vektor[7][index]++
+			//fmt.Println(x, y, index)
 		}
 	}
 	for x := 3 * width; x < 4*width; x++ { // 8
-		for y := 3 * width; y < 4*height; y++ {
+		for y := 3 * height; y < 4*height; y++ {
 			index := indexHSV(img.At(x, y))
 			vektor[8][index]++
+			//fmt.Println(x, y, index)
 		}
 	}
 	return vektor
@@ -257,6 +269,7 @@ func searchImageColor(imageSearched string, binsFile string, targetFile string) 
 	}
 	var finalImage []tuplePercentage
 	for _, tuple := range tempFoundImage {
+		//fmt.Println(tuple)
 		if tuple.Percentage >= 0.60 {
 			finalImage = append(finalImage, tuple)
 		}
@@ -284,7 +297,7 @@ func searchImageColor(imageSearched string, binsFile string, targetFile string) 
 
 func main() {
 	stime := time.Now()
-	searchImageColor("12.jpg", "image.json", "result.json")
+	searchImageColor("334.jpg", "busImage.json", "resultBus.json")
 	etime := time.Now()
 	dtime := etime.Sub(stime)
 	fmt.Println("Diff Time:", dtime)
