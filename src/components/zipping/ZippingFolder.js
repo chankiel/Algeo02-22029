@@ -4,12 +4,18 @@ import axios from 'axios';
 import { useDropzone } from 'react-dropzone';
 import "./dataset.css"
 import Swal from 'sweetalert';
+import validator from 'validator';
 
 const FileUploadForm = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [diffTime, setDiffTime] = useState(false);
   const [secondTime, setSecondTime] = useState(0);
+  const [datasetSource, setDatasetSource] = useState(false);
+  const [error, setError] = useState(null);
+  const [url, setUrl] = useState("");
+  const [response, setResponse] = useState(null);
+  const [isValidUrl, setIsValidUrl] = useState(false);
 
   const onDrop = useCallback((acceptedFiles) => {
     setSelectedFiles(acceptedFiles);
@@ -17,6 +23,13 @@ const FileUploadForm = () => {
   }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, disabled: loading });
+
+  const changeDatasetSource = () => {
+    console.log('Source Dataset: ', datasetSource);
+    var temp = datasetSource;
+    setDatasetSource(!temp);
+    console.log('Source After: ', datasetSource);
+  }
 
   const onChangeFile = async () => {
     if (!selectedFiles || selectedFiles.length === 0) {
@@ -66,8 +79,92 @@ const FileUploadForm = () => {
     }
   };
   
+  const handleUrlChange = (event) => {
+    const enteredUrl = event.target.value;
+    setUrl(enteredUrl);
+    setIsValidUrl(validator.isURL(enteredUrl));
+    setDiffTime(false);
+  };
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    setDiffTime(false);
+    const startTime = performance.now();
+  
+    setLoading(true);
+    setIsValidUrl(false);
+    
+    try {
+      // Make a POST request to your backend API with the entered URL
+      const response = await fetch(`http://localhost:8080/scrape/${url}`, {method:'GET'});
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const responseData = await response.json();
+      console.log(responseData);
+      Swal('Image scraping successful');
+    } catch (error) {
+    console.error('Error scraping URL', error);
+    alert(error.message || 'Error scraping URL');
+    } finally {
+    setLoading(false);
+    const endTime = performance.now();
+    setDiffTime(true);
+    var temp = endTime - startTime;
+    var temp2 = temp / 1000;
+    if (temp2 < 0) {
+        temp2 = 0;
+    }
+    setSecondTime(temp2);
+    }
+  };
+  
   return (
     <div className='main-dataset'>
+      <div className='type-search special-case'>
+        <p>Local</p>
+        <label className='switch'>
+          <input type='checkbox' value='1' onChange={changeDatasetSource}></input>
+          <span className='slider'></span>
+        </label>
+        <p>Scraping</p>
+      </div>
+      {datasetSource ? (
+        <div className='box-dataset scraping-input'>
+          {!loading && (
+            <form onSubmit={handleFormSubmit} className='url-input-form'>
+              <label htmlFor="urlInput"></label>
+              <input
+                type="text"
+                id="urlInput"
+                name="urlInput"
+                value={url}
+                onChange={handleUrlChange}
+                placeholder="www.example.com"
+              />
+            {isValidUrl && (<button type="submit">Submit</button>)}
+            </form>
+          )}
+          {loading && (
+          <div className='loading-style'>
+            <div className='box-input loading'>
+              <p id="loading-disable">Loading</p>
+            </div>
+            <div className='typing-animation'>
+              <div className="dot dot1"></div>
+              <div className="dot dot2"></div>
+              <div className="dot dot3"></div>
+            </div>
+          </div>
+          )}
+          {diffTime && (
+          <div className='success-bottom'>
+            <p>Berhasil diupload dalam waktu {secondTime.toFixed(2)}s.</p>
+          </div>
+        )}
+      </div>
+      ):(
       <div className='box-dataset'>
         {!loading && (
           <div {...getRootProps()} className='box-input' disabled={loading}>
@@ -94,15 +191,6 @@ const FileUploadForm = () => {
             </div>
           </div>
         )}
-        {selectedFiles.length !== 0 && (
-          <div className='label-upload'>
-            <label htmlFor="upload-dataset" className='butn dataset-upload'>
-              Upload
-            </label>
-            <button id="upload-dataset" type="button" onClick={onChangeFile} style={{display: 'none'}}>
-            </button>
-          </div>
-        )}
         {loading && (
           <div className='loading-style'>
             <div className='box-input loading'>
@@ -115,12 +203,22 @@ const FileUploadForm = () => {
             </div>
           </div>
         )}
+        {selectedFiles.length !== 0 && (
+          <div className='label-upload'>
+            <label htmlFor="upload-dataset" className='butn dataset-upload'>
+              Upload
+            </label>
+            <button id="upload-dataset" type="button" onClick={onChangeFile} style={{display: 'none'}}>
+            </button>
+          </div>
+        )}
         {diffTime && (
           <div>
             <p>Berhasil diupload dalam waktu {secondTime.toFixed(2)}s.</p>
           </div>
         )}
       </div>
+      )}
     </div>
   );
 };

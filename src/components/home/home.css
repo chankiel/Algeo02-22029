@@ -1,14 +1,72 @@
-#try-it{
-    width: 120px;
-    text-decoration: none;
-    height: 20px;
-    text-align: center;
-    padding: 5px 20px 5px 20px;
-    transition: 1s;
-    background-size: 200% auto;
-    color: white;
+.step-box img {
+    height: auto;
+    width: 100px;
     border-radius: 10px;
-    box-shadow: 0px 2px 4px 0px black;
-    cursor: pointer;
-    font-size: 0.9rem;
+    margin: 0 20px 0 20px;
+}
+
+.step-box {
+    height: auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.inside {
+    display: flex;
+    align-items: start;
+}
+
+.step-container {
+    width: 47%;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.step-container h1 {
+    position: relative;
+    margin-left: 40px;
+}
+
+.main-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.left-title {
+    margin-left: 20px;
+    width: 200px;
+    justify-content: center;
+    align-content: center;
+}
+
+.left-title h1 {
+    font-size: 3.4rem;
+}
+
+.try-it {
+    text-decoration: none;
+    color: white;
+}
+
+.try-it-box {
+    width: 150px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 1s;
+    background-image: linear-gradient(to right, rgb(2, 2, 31)0%, rgb(5, 5, 112) 50%, rgb(91, 8, 146) 100%);
+    background-size: 200% auto;
+    border-radius: 13px;
+    box-shadow: 0 2px 6px 0px black;
+}
+
+.try-it-box:hover {
+    background-position: right center;
+    box-shadow: 1px 3px 10px 2px black;
 }

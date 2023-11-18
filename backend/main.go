@@ -4,12 +4,16 @@ import (
 	"archive/zip"
 	cbir "backend/cbir"
 	"io"
+	"log"
 	"net/http"
+	"net/url"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"fmt"
 
+	"github.com/PuerkitoBio/goquery"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
@@ -23,7 +27,105 @@ func main() {
 	r.POST("/upload-zip", handleZip)
 	r.POST("/search-color", handleSearchColor)
 	r.POST("/search-texture", handleTexture)
+	r.GET("/scrape/*url", func(c *gin.Context) {
+		os.MkdirAll("../src/dataset", os.ModePerm)
+		rawUrl := c.Param("url")
+		if rawUrl != "" {
+			// Ensure the URL starts correctly
+			if !strings.HasPrefix(rawUrl, "http://") && !strings.HasPrefix(rawUrl, "https://") {
+				// Trim the leading slash if present
+				rawUrl = strings.TrimPrefix(rawUrl, "/")
+				// Prepend the scheme
+				rawUrl = "http://" + rawUrl
+			}
+
+			if err := scrapeWebsite(rawUrl); err != nil {
+				fmt.Println("di sini gan 3")
+				c.JSON(http.StatusInternalServerError, gin.H{
+					"error": err.Error(),
+				})
+				return
+			}
+			cbir.PreproccessImageColor("../src/dataset", "../dataset_vector/color.json")
+			cbir.MakeJSONDataset("../src/dataset", "../dataset_vector/texture.json")
+			c.JSON(http.StatusOK, gin.H{
+				"status": "Image scraping successful",
+			})
+
+			srcDir := "../src/dataset"
+			dstDir := "../public/dataset"
+			err := moveFiles(srcDir, dstDir)
+			if err != nil {
+				fmt.Println("File berhasil dipindahkan.")
+				return
+			}
+		} else {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "URL is required",
+			})
+		}
+	})
 	r.Run(":8080")
+}
+
+func scrapeWebsite(urlString string) error {
+	response, err := http.Get(urlString)
+	if err != nil {
+		fmt.Println("di sini gan 1")
+		return err
+	}
+	defer response.Body.Close()
+
+	doc, err := goquery.NewDocumentFromReader(response.Body)
+	if err != nil {
+		fmt.Println("di sini gan 2")
+		return err
+	}
+	doc.Find("img").Each(func(i int, s *goquery.Selection) {
+		src, exists := s.Attr("src")
+		if exists {
+			absoluteSrc := resolveURL(src, urlString)
+			if err = downloadImages(absoluteSrc); err != nil {
+				// Log error and continue with next image
+				log.Printf("Error downloading image: %s", err)
+				fmt.Println("di sini gan 1")
+			}
+		}
+	})
+	return nil
+}
+
+func downloadImages(imageURL string) error {
+	response, err := http.Get(imageURL)
+	if err != nil {
+		return err
+	}
+	defer response.Body.Close()
+
+	fileName := filepath.Join("../src/dataset", filepath.Base(imageURL))
+	file, err := os.Create(fileName)
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+
+	_, err = io.Copy(file, response.Body)
+	return err
+}
+
+func resolveURL(src, baseURL string) string {
+	// Resolve relative URLs to absolute
+	resolvedURL, err := url.Parse(src)
+	if err != nil {
+		log.Printf("Error parsing URL: %s", err)
+		return src
+	}
+	base, err := url.Parse(baseURL)
+	if err != nil {
+		log.Printf("Error parsing base URL: %s", err)
+		return src
+	}
+	return base.ResolveReference(resolvedURL).String()
 }
 
 func handleTexture(c *gin.Context) {
