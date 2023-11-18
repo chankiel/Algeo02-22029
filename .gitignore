@@ -10,10 +10,10 @@
 
 # production
 /build
+/public/dataset
 
 # dataset
-/assets
-/image
+/temp
 
 # misc
 .DS_Store

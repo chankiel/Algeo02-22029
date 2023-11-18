@@ -1,29 +1,33 @@
 {
-  "name": "reservasi_parkir",
+  "name": "upload-with-golang",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.14.17",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "@types/react-router-dom": "^5.3.3",
-    "axios": "^1.6.1",
-    "bootstrap": "^5.3.1",
-    "cls": "^0.1.5",
-    "cors": "^2.8.5",
-    "express": "^4.18.2",
-    "html5-qrcode": "^2.3.8",
+    "axios": "^1.6.2",
+    "framer-motion": "^10.16.5",
+    "install": "^0.13.0",
     "jszip": "^3.10.1",
-    "mongoose": "^7.4.2",
+    "npm": "^10.2.3",
     "react": "^18.2.0",
-    "react-bootstrap": "^2.8.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
+    "react-paginate": "^8.2.0",
+    "react-router-dom": "^6.18.0",
     "react-scripts": "5.0.1",
+    "styled-components": "^6.1.1",
+    "sweetalert": "^2.1.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"npm run start-frontend\" \"npm run start-backend\"",
+    "start-frontend": "react-scripts start",
+    "start-backend": "cd backend && go run main.go",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -47,6 +51,6 @@
     ]
   },
   "devDependencies": {
-    "react-router-dom": "^6.14.2"
+    "concurrently": "^8.2.2"
   }
 }
