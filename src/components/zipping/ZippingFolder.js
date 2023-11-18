@@ -12,9 +12,7 @@ const FileUploadForm = () => {
   const [diffTime, setDiffTime] = useState(false);
   const [secondTime, setSecondTime] = useState(0);
   const [datasetSource, setDatasetSource] = useState(false);
-  const [error, setError] = useState(null);
   const [url, setUrl] = useState("");
-  const [response, setResponse] = useState(null);
   const [isValidUrl, setIsValidUrl] = useState(false);
 
   const onDrop = useCallback((acceptedFiles) => {
@@ -142,8 +140,9 @@ const FileUploadForm = () => {
                 value={url}
                 onChange={handleUrlChange}
                 placeholder="www.example.com"
+                autoComplete='off'
               />
-            {isValidUrl && (<button type="submit">Submit</button>)}
+            {isValidUrl && (<button type="submit">Scrape</button>)}
             </form>
           )}
           {loading && (
