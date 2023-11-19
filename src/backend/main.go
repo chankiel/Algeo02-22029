@@ -46,6 +46,7 @@ func main() {
 				})
 				return
 			}
+
 			cbir.PreproccessImageColor("../src/dataset", "../dataset_vector/color.json")
 			cbir.MakeJSONDataset("../src/dataset", "../dataset_vector/texture.json")
 			c.JSON(http.StatusOK, gin.H{

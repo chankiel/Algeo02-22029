@@ -28,7 +28,7 @@ export default function Search() {
   const [listSimiliarImage, setListSimiliarImage] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [time,setTime] = useState(0);
-  const imagesPerPage = 28; // 4 images in a row and 3 in a column
+  const imagesPerPage = 28; 
 
   const handleChange = (e) => {
     const file = e.target.files[0];
@@ -151,7 +151,7 @@ export default function Search() {
         <div className='input-box'>
           <div className='main-top'>
             <div className='top-input'>
-              <p style={{ margin: '0px 0px 10px 3px' }}>Image Input</p>
+              <p style={{ margin: '0px 0px 10px 3px', fontWeight:'bold'}}>Image Input</p>
               <label htmlFor='fileInput' className='btn upload'>
                 Insert an Image
               </label>

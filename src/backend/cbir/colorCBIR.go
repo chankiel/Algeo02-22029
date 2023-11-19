@@ -177,7 +177,16 @@ func CreateDataExtraction(dirpath string) []Vektor {
 	return data
 }
 
+func folderExists(folderPath string) bool {
+	// Use os.Stat to get information about the file or directory
+	_, err := os.Stat(folderPath)
+
+	// Check if the folder exists
+	return !os.IsNotExist(err)
+}
+
 func PreproccessImageColor(dirpath string, destFile string) {
+
 	data := CreateDataExtraction(dirpath)
 
 	file, err := os.Create(destFile)
@@ -307,23 +316,7 @@ func SearchImageColor(imageSearched string, binsFile string, targetFile string) 
 	sort.Sort(ByPercentage(finalImage))
 
 	fmt.Println("Banyak gambar yang ditemukan:", len(finalImage))
-	var nullImage []tuplePercentage
 
-	file, err := os.Create(targetFile)
-	if err != nil {
-		fmt.Println("Error creating file:", err)
-		return nullImage
-	}
-	defer file.Close()
-
-	encoder := json.NewEncoder(file)
-
-	err = encoder.Encode(finalImage)
-	if err != nil {
-		fmt.Println("Error encoding JSON:", err)
-		return nullImage
-	}
-	fmt.Printf("Data written to %v\n", targetFile)
 	return finalImage
 }
 
