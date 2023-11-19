@@ -30,7 +30,7 @@
 ## Usage <a name="usage"></a>
 1. Perform `npm install` in your terminal
 2. Run `npm start`
-3. Then the website will pop out in your browser with url "http://localhost:3030"
+3. Then the website will pop out in your browser with url "http://localhost:3000"
 4. Click _search_ to move to Search menu
 5. Select upload dataset method, either you want to upload from your local or scrape from a website.
    - Local
@@ -57,7 +57,7 @@ Algeo02-22029
 │   ├── dataset_vector              # Vektor color dan texture dari dataset
 │   ├── image                       # Folder penyimpan query image
 │   ├── public
-│       └── dataset                 # Menyimpan imaga hasil scraping atau upload
+│       └── dataset                 # Menyimpan image hasil scraping atau upload
 │   ├── result                      # Menyimpan hasil temuan kemiripan image dengan query
 │   ├── src                         # Berisi source code web
 │   └── temp                        # Menyimpan data sementara dalam bentuk zip untuk import dataset lokal
