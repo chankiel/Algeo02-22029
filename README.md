@@ -1,2 +1,1 @@
-# sshhh
-Jangan sampai Scifo tahu
+Algeo02
