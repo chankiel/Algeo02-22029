@@ -9,7 +9,7 @@
 - [Programming Language Used](#languages)
 - [Contacts](#contact)
 
-## General Information <a name="general-information></a>
+## General Information <a name="general-information"></a>
 - Content-Based Image Retrieval (CBIR) with Color parameter and Texture Parameter
 - CBIR application using Cosine Similarity of color vector and texture vector of each images.
 - Color vector extraction using HSV of each 4x4 blocks and each of HSV range combinations.
