@@ -24,7 +24,7 @@
 - CBIR Texture Parameter
 - Image Website Scraping
 
-## Screenshots <a name="screenshots><a/>
+## Screenshots <a name="screenshots"></a>
 ![Screenshot](ss-website.png)
 
 ## Usage <a name="usage"></a>
@@ -65,7 +65,7 @@ Algeo02-22029
 
 ```    
 
-## Programming Languages Used
+## Programming Languages Used <a name="languages"></a>
 - FrontEnd : React Javascript
 - BackEnd  : Golang
 
