@@ -309,7 +309,7 @@ func SearchImageColor(imageSearched string, binsFile string, targetFile string) 
 	var finalImage []tuplePercentage
 	for _, tuple := range tempFoundImage {
 		//fmt.Println(tuple)
-		if tuple.Percentage >= 60 {
+		if tuple.Percentage > 60 {
 			finalImage = append(finalImage, tuple)
 		}
 	}
