@@ -69,5 +69,5 @@ Algeo02-22029
 - FrontEnd : React Javascript
 - BackEnd  : Golang
 
-## Contacts <a name="contact></a>
+## Contacts <a name="contact"></a>
  Created by [@IgnatiusJHC](https://github.com/chankiel), [@SuthasomaMM](https://github.com/sotul04), dan [@MarvinScifoYH](https://github.com/scifo04)
