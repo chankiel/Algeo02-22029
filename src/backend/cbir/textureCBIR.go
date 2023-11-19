@@ -41,9 +41,24 @@ var textureArr []ImgComp
 
 func MakeTexture(url string) ImgComp {
 	ImgGray := MakeGray(url)
-	glcm := MakeOcc(ImgGray, 1, 0)
-	imgComp := MakeImgComp(glcm)
+	imgComp := MakeImgCompMean(ImgGray)
 	imgComp.URL = filepath.Base(url)
+	return imgComp
+}
+
+func MakeImgCompMean(imgGray GrayImg)(ImgComp){
+	glcm1 := MakeOcc(imgGray,1,0)
+	glcm2 := MakeOcc(imgGray,1,1)
+	glcm3 := MakeOcc(imgGray,0,1)
+	glcm4 := MakeOcc(imgGray,-1,1)
+	imgComp1 := MakeImgComp(glcm1)
+	imgComp2 := MakeImgComp(glcm2)
+	imgComp3 := MakeImgComp(glcm3)
+	imgComp4 := MakeImgComp(glcm4)
+	var imgComp ImgComp
+	imgComp.Contrast = (imgComp1.Contrast+imgComp2.Contrast+imgComp3.Contrast+imgComp4.Contrast)/4
+	imgComp.Homogenity = (imgComp1.Homogenity+imgComp2.Homogenity+imgComp3.Homogenity+imgComp4.Homogenity)/4
+	imgComp.Entropy = (imgComp1.Entropy+imgComp2.Entropy+imgComp3.Entropy+imgComp4.Entropy)/4
 	return imgComp
 }
 
