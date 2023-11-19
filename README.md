@@ -1,29 +1,22 @@
 
 
-#### Struktur Folder test
-```
-    .
-    ├── ...
-    ├── test                     # Test folder
-    │   ├── bicubic              # Test Interpolasi Bicubic Spline
-    │   ├── determinan           # Test Determinan
-    │   ├── imgBSI               # Test Peningkatan Kualitas Gambar
-    │   ├── interpolasi          # Test Interpolasi Polinomial
-    │   ├── inverse              # Test Matriks Balikan 
-    │   ├── regresi              # Test Regresi Linier Berganda
-    │   └── spl                  # Test Sistem Persamaan Linier
-    └── ...
-```
-Untuk setiap folder di atas mulai dari "bicubic" hingga "spl".  
-Terdapat child folder yaitu input dan output.
 
-#### Struktur Folder spl
+#### Struktur Folder
 ```   
-   ├── spl                       # Test 
-   │   ├── input                 # Berisi file sebagai input untuk Fitur SPL
-   │   │   ├── test1.txt         # Contoh file input 
-   │   │   └── test2.txt         # Contoh file input 
-   │   └── output                # Berisi file hasil output dari Fitur SPL
-   │       ├── res1.txt          # Contoh file hasil 
-   │       └── res2.txt          # Contoh file hasil 
-```
+.
+├── doc                             # Laporan
+├── img                             # Screenshot hasil uji coba program
+├── src
+│   ├── backend
+│       ├── cbir                    # Source Color and Texture Processor
+│       └── main.go                 # Backend main program
+│   ├── dataset_vector              # Vektor color dan texture dari dataset
+│   ├── image                       # Folder penyimpan query image
+│   ├── public
+│       └── dataset                 # Menyimpan imaga hasil scraping atau upload
+│   ├── result                      # Menyimpan hasil temuan kemiripan image dengan query
+│   ├── src                         # Berisi source code web
+│   └── temp                        # Menyimpan data sementara dalam bentuk zip untuk import dataset lokal
+└── test                            # Berisi gambar masukan untuk pengujian
+
+```     
