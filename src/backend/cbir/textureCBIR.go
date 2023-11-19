@@ -211,8 +211,8 @@ func MakeImgComp(glcm GlcmMatrix) ImgComp {
 	for i := 0; i < glcm.sizeOcc; i++ {
 		for j := 0; j < glcm.sizeOcc; j++ {
 			if glcm.occMtrx[i][j] > 0 {
-				ImgTemp.Contrast += glcm.occMtrx[i][j] * float64((i-j+2*glcm.lowerBound)*(i-j+2*glcm.lowerBound))
-				ImgTemp.Homogenity += glcm.occMtrx[i][j] / (float64(1 + (i-j+2*glcm.lowerBound)*(i-j+2*glcm.lowerBound)))
+				ImgTemp.Contrast += glcm.occMtrx[i][j] * float64((i-j)*(i-j))
+				ImgTemp.Homogenity += glcm.occMtrx[i][j] / (float64(1 + ((i-j)*(i-j))))
 				ImgTemp.Entropy -= glcm.occMtrx[i][j] * math.Log10(glcm.occMtrx[i][j])
 			}
 		}
