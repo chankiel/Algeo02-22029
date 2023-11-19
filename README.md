@@ -3,7 +3,7 @@
 
 #### Struktur Folder
 ```   
-.
+Algeo02-22029
 ├── doc                             # Laporan
 ├── img                             # Screenshot hasil uji coba program
 ├── src
